@@ -275,6 +275,7 @@ const sikat = function(){
     var t0 = performance.now();
     let thePop = new population(m, true);
     if(document.getElementById('yourText').disabled){
+        document.getElementById("demo").innerHTML = '';
         for(let indexIterations = 0; indexIterations < 1000; indexIterations++) {
             thePop = evolve(thePop, true); 
         }
