@@ -10,6 +10,7 @@
     <br>
     <div class="w3-container w3-center">
         <h2>Algoritma Genetika untuk Optimasi Fungsi dengan Banyak Variabel</h2>
+        <p id="texz"><a href="#" onclick="readme()">click me</a> pleasee!</p>
         <div style="display: inline-block; text-align: left;">
             Jumlah Variabel
             <input class="w3-input w3-border" type="text" id="var" placeholder="Masukkan jumlah variabel"/><br/>
@@ -22,8 +23,11 @@
                 <option value="SumSquares">Sum Squares</option>
                 <option value="SchumerSteiglitz">Schumer-Steiglitz</option>
                 <option value="Quintic">Quintic</option>
-            </select>        
-        </div>
+            </select>     
+            <br/><br/>
+            <input type="checkbox" id="yourBox" /> Beri batas <i>Fitness</i>
+            <input class="w3-input w3-border" type="text" id="yourText" placeholder="Batas, contoh = 0.0001" disabled />   
+        </div>     
         <br/><br/>
         <button class="w3-medium w3-green w3-button" onclick="sikat()"><b>Hitung</b></button>
         <br/><br/>
@@ -33,7 +37,9 @@
         <p id="demo3"></p>
     </div>
 <script>
-
+document.getElementById('yourBox').onchange = function() {
+    document.getElementById('yourText').disabled = !this.checked;
+};
 const m = 50;
 //--chromosome factory--//
 const chromosome = function(initialization){
@@ -268,11 +274,22 @@ const lib = function(){
 const sikat = function(){
     var t0 = performance.now();
     let thePop = new population(m, true);
-    for(let indexIterations = 0; indexIterations < 1000; indexIterations++) {
-        thePop = evolve(thePop, true); 
+    if(document.getElementById('yourText').disabled){
+        for(let indexIterations = 0; indexIterations < 1000; indexIterations++) {
+            thePop = evolve(thePop, true); 
+        }
+    }else {
+        for(let indexIterations = 0; indexIterations < 1000; indexIterations++) {
+            thePop = evolve(thePop, true);
+            if(thePop.getFittest().getFitness() < parseFloat(document.getElementById('yourText').value)){
+                document.getElementById("demo").innerHTML = 'Jumlah iterasi : '+indexIterations;
+                break;
+                
+            } 
+        }
     }
     var t1 = performance.now();
-    document.getElementById("demo1").innerHTML = 'Fitness = ' + thePop.getFittest().getFitness();
+    document.getElementById("demo1").innerHTML = 'Fitness : ' + thePop.getFittest().getFitness();
     document.getElementById("demo2").innerHTML = 'Waktu yang ditempuh : ' + (t1-t0)/1000 + ' detik';
     var targetList = document.getElementById("demo3");
     var myList = '<ul class="w3-ul">';
@@ -281,6 +298,12 @@ const sikat = function(){
     }
     targetList.innerHTML = myList;
 };
+function readme(){
+    var texz = "Ketika algoritma diimplementasikan dalam bahasa pemrograman JavaScript, output memiliki hasil\n\
+yang jauh lebih baik<br> dibandingkan ketika diimplementasikan dalam bahasa JAVA. namun, implementasi dalam bahasa JavaScript menghabiskan waktu<br>\n\
+yang lebih lama. Oleh karena itu, disediakan input untuk membatasi nilai <i>fitness</i> agar dapat memotong waktu jalannya proses.";
+    document.getElementById('texz').innerHTML = texz;
+}
 </script>
 </body>
 </html>
