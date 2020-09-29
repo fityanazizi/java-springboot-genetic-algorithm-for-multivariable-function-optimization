@@ -307,7 +307,7 @@ const sikat = function(){
         }
     }
     var t1 = performance.now();
-    document.getElementById("demo1").innerHTML = 'Fitness : ' + thePop.getFittest().getFitness();
+    document.getElementById("demo1").innerHTML = 'Fitness/Optimum di : ' + thePop.getFittest().getFitness();
     document.getElementById("demo2").innerHTML = 'Waktu yang ditempuh : ' + (t1-t0)/1000 + ' detik';
     var targetList = document.getElementById("demo3");
     var myList = '<ul class="w3-ul">';
@@ -323,5 +323,8 @@ yang lebih lama. Oleh karena itu, disediakan input untuk membatasi nilai <i>fitn
     document.getElementById('texz').innerHTML = texz;
 }
 </script>
+<footer>
+  <p style="text-align: center">&copy;Fityan Azizi, 2020<br>
+</footer>
 </body>
 </html>

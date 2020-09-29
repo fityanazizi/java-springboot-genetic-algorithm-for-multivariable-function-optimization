@@ -53,7 +53,7 @@ public class AppController extends HttpServlet {
         float sec = (end - start) / 1000F;
         //main
         response.getWriter().print("Waktu yang ditempuh : " +sec+ " detik"+"<br>");
-        response.getWriter().print("Fitness : " +pop.getFittest().getFitness()+ "<br><br>");
+        response.getWriter().print("Fitness/Optimum di : " +pop.getFittest().getFitness()+ "<br><br>");
         response.getWriter().print("Solusi : " + "<br>");
         for(int i = 0; i < numOfVariables; i++){
             response.getWriter().print(pop.getFittest().x[i]+"<br><br>");
