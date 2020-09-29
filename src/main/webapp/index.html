@@ -6,6 +6,20 @@
     <link rel = "icon" href ="dna.png" type = "image/x-icon"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script>
+        Sphere = new Image().src = "sphere.png";
+        Csendes = new Image().src = "csendes.png";
+        Alpine = new Image().src = "alpine.png";
+        Exponential = new Image().src = "exponential.PNG";
+        SumSquares = new Image().src = "sumsquares.png";
+        SchumerSteiglitz = new Image().src = "schumer.png";
+        Quintic = new Image().src = "quintic.PNG";
+        function setImage(imageSelect) {
+        theImageIndex = imageSelect.options[imageSelect.selectedIndex].value;
+        if (document.images)
+            document.images[0].src = eval(theImageIndex);
+        }
+    </script>
     </head>
     <body style="background-color:#F1FFF2; font-family:Sans-serif;">
         <div class="w3-container w3-center">
@@ -15,7 +29,7 @@
                 Jumlah Variabel
                 <input class="w3-input w3-border" type="text" id="var" placeholder="Masukkan jumlah variabel"/><br/>
                 Jenis Fungsi
-                <select id="type" class="w3-select w3-border w3-white">
+                <select id="type" class="w3-select w3-border w3-white" onchange="setImage(this)">
                     <option value="Sphere">Sphere</option>
                     <option value="Csendes">Csendes</option>
                     <option value="Alpine">Alpine</option>
@@ -26,6 +40,9 @@
                 </select>        
             </div>
             <br/><br/>
+            <p>Bentuk Fungsi</p>
+            <img id="img" src="sphere.png">
+            <br>
             <button class="w3-medium w3-green w3-button" onclick="callJqueryAjax()"><b>Hitung</b></button>
             <br/><br/>
             <div id="result"></div>

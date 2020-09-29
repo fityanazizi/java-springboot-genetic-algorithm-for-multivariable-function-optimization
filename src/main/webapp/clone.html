@@ -5,6 +5,20 @@
     <link rel = "icon" href ="dna.png" type = "image/x-icon"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script>
+        Sphere = new Image().src = "sphere.png";
+        Csendes = new Image().src = "csendes.png";
+        Alpine = new Image().src = "alpine.png";
+        Exponential = new Image().src = "exponential.PNG";
+        SumSquares = new Image().src = "sumsquares.png";
+        SchumerSteiglitz = new Image().src = "schumer.png";
+        Quintic = new Image().src = "quintic.PNG";
+        function setImage(imageSelect) {
+        theImageIndex = imageSelect.options[imageSelect.selectedIndex].value;
+        if (document.images)
+            document.images[0].src = eval(theImageIndex);
+        }
+    </script>
 </head>
 <body style="background-color:#F1FFF2; font-family:Sans-serif;">
     <br>
@@ -15,7 +29,7 @@
             Jumlah Variabel
             <input class="w3-input w3-border" type="text" id="var" placeholder="Masukkan jumlah variabel"/><br/>
             Jenis Fungsi
-            <select id="type" class="w3-select w3-border w3-white">
+            <select id="type" class="w3-select w3-border w3-white" onchange="setImage(this)">
                 <option value="Sphere">Sphere</option>
                 <option value="Csendes">Csendes</option>
                 <option value="Alpine">Alpine</option>
@@ -29,6 +43,9 @@
             <input class="w3-input w3-border" type="text" id="yourText" placeholder="Batas, contoh = 0.0001" disabled />   
         </div>     
         <br/><br/>
+        <p>Bentuk Fungsi</p>
+        <img id="img" src="sphere.png">
+        <br>
         <button class="w3-medium w3-green w3-button" onclick="sikat()"><b>Hitung</b></button>
         <br/><br/>
         <p id="demo"></p>
@@ -210,7 +227,7 @@ const crossover = function(parent1, parent2){
     for(let zz = 0; zz < new lib().variables; zz++){
         child.x[zz] = parent1.x[zz];
     }
-    child.fitness = child.getFitness();
+    child.fitness = parent1.getFitness();
     for(var indexCross = 0; indexCross < new lib().variables; indexCross++){       
     	const childFitness = child.getFitness();
         child.setX(indexCross, (parent1.getX(indexCross) + parent2.getX(indexCross))/2);
@@ -223,7 +240,7 @@ const crossover = function(parent1, parent2){
 //mutation
 const mutation = function(chrom){
     const chrom_ = chrom;
-    chrom_.fitness = chrom_.getFitness();
+    chrom_.fitness = chrom.getFitness();
     for(var indexMut = 0; indexMut < new lib().variables; indexMut++){
         const chromFitness = chrom.getFitness();
         chrom.setX(indexMut, chrom.getX(indexMut) + Math.random() - 0.5);
